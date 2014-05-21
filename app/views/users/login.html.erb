@@ -1,0 +1,228 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script>
+	var pattern = <%= @pat.to_s %>;
+	$( document ).ready(function() {
+	    
+	});
+	
+	
+	</script>
+	
+	<script>
+	function allowDrop(ev)
+	{
+	ev.preventDefault();
+	}
+
+	function drag(ev)
+	{
+		//alert(pattern[0]);
+		ev.dataTransfer.setData("iden",ev.target.id);
+	
+	}
+
+	function drop(ev)
+	{
+		ev.preventDefault();
+		var iden = ev.dataTransfer.getData("iden");
+		
+		var img1 = document.getElementById(ev.target.id);
+		var img2 = document.getElementById(iden);
+		
+		
+		if(img1.getAttribute("value") == "not"){
+			img2.id = "img" + ev.target.id;
+			var id1 = parseInt(iden.split('img')[1]);
+			//alert(id1);
+			$("#" + id1).html(""+(id1+1));
+			document.getElementById(id1).setAttribute("value","not");
+			$("#"+ev.target.id).html(img2);
+			pattern[parseInt(ev.target.id)] = parseInt(img2.getAttribute("value"));
+			pattern[id1] = 0;
+			return;
+		}
+		
+		
+		
+		
+		
+		//alert("xc");
+		
+		var id1 = parseInt(iden.split('img')[1]);
+		var id2 = parseInt(ev.target.id.split('img')[1]);
+		
+		var temps = img1.src;
+		var tempv = img1.getAttribute("value");
+		var i1 = parseInt(tempv);
+		var i2 = parseInt(img2.getAttribute("value"));
+		//alert(img2.id);
+		pattern[id1] = i1;
+		pattern[id2] = i2;
+		
+		//alert(i2 + " "+ i1);
+		
+		img1.src = img2.src;
+		img1.setAttribute("value",img2.getAttribute("value"));
+		
+		img2.src = temps;
+		img2.setAttribute("value",tempv);
+		
+		//pattern[index] = parseInt(test);
+		//$("#"+element.id).append('</br>(' + name +')');
+		
+		
+	}
+	function postshit(){
+		$("#pattern").attr("name","pattern[]");
+		$("#pattern").val(pattern);
+		$("#test").click();
+	}
+	</script>
+</head>
+<body>
+	<%= @user.username%>
+	</br>
+	</br>
+</br>
+<% index = 0 %>
+<table id="register-grid">
+	<tr>
+		<% if @pos.include?(0)%>
+		<td id="0" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[0]].category_id %>" id="img0" height="100" width="100" src="/assets/<%= @images[@image_index[0]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="0" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">1</td>
+		<% end %>
+		
+		<% if @pos.include?(1)%>
+		<td id="1" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[1]].category_id %>" id="img1" height="100" width="100" src="/assets/<%= @images[@image_index[1]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="1" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">2</td>
+		<% end %>
+		
+		<% if @pos.include?(2)%>
+		<td id="2" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[2]].category_id %>" id="img2" height="100" width="100" src="/assets/<%= @images[@image_index[2]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="2" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">3</td>
+		<% end %>
+		
+		<% if @pos.include?(3)%>
+		<td id="3" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[3]].category_id %>" id="img3" height="100" width="100" src="/assets/<%= @images[@image_index[3]].url%>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="3" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">4</td>
+		<% end%>
+	</tr>
+	
+	<tr>
+		<% if @pos.include?(4)%>
+		<td id="4" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[4]].category_id %>" id="img4" height="100" width="100" src="/assets/<%= @images[@image_index[4]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="4" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">5</td>
+		<% end %>
+		
+		<% if @pos.include?(5)%>
+		<td id="5" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[5]].category_id %>" id="img5" height="100" width="100" src="/assets/<%= @images[@image_index[5]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="5" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">6</td>
+		<% end %>
+		
+		<% if @pos.include?(6)%>
+		<td id="6" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[6]].category_id %>" id="img6" height="100" width="100" src="/assets/<%= @images[@image_index[6]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="6" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">7</td>
+		<% end %>
+		
+		<% if @pos.include?(7)%>
+		<td id="7" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[7]].category_id %>" id="img7" height="100" width="100" src="/assets/<%= @images[@image_index[7]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="7" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">8</td>
+		<% end %>
+	</tr>
+	
+	<tr>
+		<% if @pos.include?(8)%>
+		<td id="8" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[8]].category_id %>" id="img8" height="100" width="100" src="/assets/<%= @images[@image_index[8]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="8" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">9</td>
+		<% end %>
+		
+		<% if @pos.include?(9)%>
+		<td id="9" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[9]].category_id %>" id="img9" height="100" width="100" src="/assets/<%= @images[@image_index[9]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="9" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">10</td>
+		<% end %>
+		
+		<% if @pos.include?(10)%>
+		<td id="10" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[10]].category_id %>" id="img10" height="100" width="100" src="/assets/<%= @images[@image_index[10]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="10" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">11</td>
+		<% end %>
+		
+		<% if @pos.include?(11)%>
+		<td id="11" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[11]].category_id %>" id="img11" height="100" width="100" src="/assets/<%= @images[@image_index[11]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="11" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">12</td>
+		<% end %>
+	</tr>
+	
+	<tr>
+		<% if @pos.include?(12)%>
+		<td id="12" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[12]].category_id %>" id="img12" height="100" width="100" src="/assets/<%= @images[@image_index[12]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="12" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">13</td>
+		<% end %>
+		
+		<% if @pos.include?(13)%>
+		<td id="13" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[13]].category_id %>" id="img13" height="100" width="100" src="/assets/<%= @images[@image_index[13]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="13" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">14</td>
+		<% end %>
+		
+		<% if @pos.include?(14)%>
+		<td id="14" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[14]].category_id %>" id="img14" height="100" width="100" src="/assets/<%= @images[@image_index[14]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="14" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">15</td>
+		<% end %>
+		
+		<% if @pos.include?(15)%>
+		<td id="15" ondrop="drop(event)" ondragover="allowDrop(event)"><img draggable="true" ondragstart="drag(event)" value="<%= @images[@image_index[15]].category_id %>" id="img15" height="100" width="100" src="/assets/<%= @images[@image_index[15]].url %>"></td>
+		<% index = index + 1 %>
+		<% else %>
+		<td id="15" value="not" ondrop="drop(event)" ondragover="allowDrop(event)">16</td>
+		<% end %>
+	</tr>
+</table>
+
+<%= form_tag :controller => 'users', :action => 'check' do %>
+	<%= hidden_field_tag :pattern %>
+	<%= hidden_field_tag :username, @user.username %>
+	<%= submit_tag "login", :id => 'test', :style => 'visibility:hidden' %>
+<% end %>
+
+<button onclick="postshit()">Login</button>
+</body>
+
+</html>
+
+
+
+
+

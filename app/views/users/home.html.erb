@@ -1,0 +1,5 @@
+<% if @user %>
+You are currently signed in as: <b><%= @user.username %></b>
+<% else %>
+<%= link_to "login", :controller => 'users', :action => 'start' %> | <%= link_to "register", :controller => 'users', :action => 'new'%>
+<% end %>

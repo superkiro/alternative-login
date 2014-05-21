@@ -1,0 +1,14 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<script src="jquery-1.11.0.min.js"></script>
+</head>
+
+<body>
+	<%= form_tag :controller => 'users', :action => 'login' do %>
+		<%= text_field_tag :username %>
+		<%= submit_tag "Login"%>
+	<% end %>
+</body>
+</html>

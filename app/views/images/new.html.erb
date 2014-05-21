@@ -1,0 +1,16 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<script src="jquery-1.11.0.min.js"></script>
+</head>
+<body>
+	<%= form_for @image do |f| %>
+		Url: <%= f.text_field :url %>
+	</br>
+		Category: <%= f.collection_select :category_id, Category.order(:name), :id, :name, {:prompt => "---  choose category ---"} %>
+	</br>
+		<%= f.submit 'Add Image'%>
+	<% end %>
+</body>
+</html>

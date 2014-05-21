@@ -1,0 +1,15 @@
+#register-grid td{
+	height:100px;
+	width:100px;
+	border: 1px solid #bebebe;
+	font-size: 24px;
+	text-align:center;
+}
+.category{
+	display:inline-block;
+	border: 1px solid #bebebe;
+	font-size: 16px;
+	padding: 10px;
+	background-color: black;
+	color:white;
+}

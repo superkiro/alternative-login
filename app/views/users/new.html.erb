@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<%= stylesheet_link_tag "application", :media => "all" %>
+	<script src="jquery-1.11.0.min.js"></script>
+	<script>
+	var pattern = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+	$( document ).ready(function() {
+	    
+	});
+	
+	
+	</script>
+	
+	<script>
+	function allowDrop(ev)
+	{
+	ev.preventDefault();
+	}
+
+	function drag(ev)
+	{
+		var element = document.getElementById(ev.target.id);
+		var test = element.getAttribute('value');
+		ev.dataTransfer.setData("name",ev.target.id);
+		ev.dataTransfer.setData("test",test);
+	
+	}
+
+	function drop(ev)
+	{
+		ev.preventDefault();
+		var name = ev.dataTransfer.getData("name");
+		var test = ev.dataTransfer.getData("test");
+		
+		var element = document.getElementById(ev.target.id);
+		var index = element.id
+		
+		pattern[index] = parseInt(test);
+		$("#"+element.id).append('</br>(' + name +')');
+		
+		
+	}
+	function postshit(){
+		$("#user_pattern").attr("name","user[pattern][]");
+		$("#user_pattern").val(pattern);
+		$("#new_user").submit();
+	}
+	</script>
+</head>
+<body>
+	<%= form_for @user do |f| %>
+		Username: <%= f.text_field :username %>
+		<%= f.hidden_field :pattern %>
+	<% end %>
+</br>
+	<div id="allcats">
+		<% @categories.each do |c|%>
+		<div draggable="true" id="<%= c.name %>" class="category" value="<%= c.id %>" ondragstart="drag(event)">
+			<%= c.name %>
+		</div>
+		<% end%>
+	</div>
+<table id="register-grid">
+	<tr>
+		<td id="0" ondrop="drop(event)" ondragover="allowDrop(event)">1</td>
+		<td id="1" ondrop="drop(event)" ondragover="allowDrop(event)">2</td>
+		<td id="2" ondrop="drop(event)" ondragover="allowDrop(event)">3</td>
+		<td id="3" ondrop="drop(event)" ondragover="allowDrop(event)">4</td>
+	</tr>
+	
+	<tr>
+		<td id="4" ondrop="drop(event)" ondragover="allowDrop(event)">5</td>
+		<td id="5" ondrop="drop(event)" ondragover="allowDrop(event)">6</td>
+		<td id="6" ondrop="drop(event)" ondragover="allowDrop(event)">7</td>
+		<td id="7" ondrop="drop(event)" ondragover="allowDrop(event)">8</td>
+	</tr>
+	
+	<tr>
+		<td id="8" ondrop="drop(event)" ondragover="allowDrop(event)">9</td>
+		<td id="9" ondrop="drop(event)" ondragover="allowDrop(event)">10</td>
+		<td id="10" ondrop="drop(event)" ondragover="allowDrop(event)">11</td>
+		<td id="11" ondrop="drop(event)" ondragover="allowDrop(event)">12</td>
+	</tr>
+	
+	<tr>
+		<td id="12" ondrop="drop(event)" ondragover="allowDrop(event)">13</td>
+		<td id="13" ondrop="drop(event)" ondragover="allowDrop(event)">14</td>
+		<td id="14" ondrop="drop(event)" ondragover="allowDrop(event)">15</td>
+		<td id="15" ondrop="drop(event)" ondragover="allowDrop(event)">16</td>
+	</tr>
+</table>
+
+<%= form_for @user do |f| %>
+	<%= f.hidden_field :pattern %>
+<% end %>
+
+<button onclick="postshit()">Register</button>
+</body>
+
+</html>
